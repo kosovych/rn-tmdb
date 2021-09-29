@@ -1,5 +1,11 @@
 import React from 'react';
-import {Text, TouchableHighlight, StyleSheet, Image, View} from 'react-native';
+import {
+  Text,
+  TouchableHighlight,
+  StyleSheet,
+  ActivityIndicator,
+  View,
+} from 'react-native';
 
 const styles = StyleSheet.create({
   overlay: {
@@ -33,10 +39,7 @@ const Button = ({loading, title, onPress, ...props}) => {
     >
       <View style={styles.button}>
         {loading ? (
-          <Image
-            style={styles.loader}
-            source={require('../../../../public/images/hug.gif')}
-          />
+          <ActivityIndicator size="small" color="#FFFFFF" />
         ) : (
           <Text style={styles.text}>{title}</Text>
         )}

@@ -2,7 +2,7 @@ import {createLogic} from 'redux-logic';
 import {get} from 'lodash';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {ACCOUNT} from '../../../constants';
+import {ACCOUNT} from '@constants';
 import {GET_USER} from '../types';
 import {storeUser} from '../actions';
 

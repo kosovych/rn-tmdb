@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 const Loader = () => {
   return (
     <View style={styles.wrapper}>
-      <ActivityIndicator size="small" color="#FFFFFF" />
+      <ActivityIndicator size="large" color="#145DA0" />
     </View>
   );
 };

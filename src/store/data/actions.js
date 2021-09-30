@@ -10,10 +10,11 @@ export const dataApiRequest = ({endpoint}) => ({
   endpoint,
 });
 
-export const dataApiSuccess = ({endpoint, response}) => ({
+export const dataApiSuccess = ({endpoint, response, feature}) => ({
   type: DATA_API_SUCCESS,
   endpoint,
   response,
+  feature,
 });
 
 export const dataApiFailure = ({endpoint}) => ({

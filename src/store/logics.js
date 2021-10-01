@@ -4,4 +4,11 @@ import {
   logoutOperation,
 } from './auth/operations';
 
-export default [loginOperation, getUserOperation, logoutOperation];
+import {getMoviesOperation} from './trendingMovies/operations';
+
+export default [
+  loginOperation,
+  getUserOperation,
+  logoutOperation,
+  getMoviesOperation,
+];

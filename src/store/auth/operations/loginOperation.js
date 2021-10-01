@@ -1,18 +1,13 @@
 import {createLogic} from 'redux-logic';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {navigate} from '../../../lib/services/NavigationService';
 
-import {
-  AUTH_TOKEN,
-  VALIDATE_TOKEN_WITH_LOGIN,
-  NEW_SESSION,
-} from '../../../constants';
+import {AUTH_TOKEN, VALIDATE_TOKEN_WITH_LOGIN, NEW_SESSION} from '@constants';
 
 import {
   dataApiSuccess,
   dataApiFailure,
   dataApiRequest,
-} from '../../data/actions';
+} from '@store/data/actions';
 import {LOGIN} from '../types';
 import {loginEndpoint} from '../endpoint';
 import {getUser, setSessionId} from '../actions';

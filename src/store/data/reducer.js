@@ -14,9 +14,12 @@ const dataReducer = (state = initialState, action) => {
     case types.DATA_API_SUCCESS:
       return mergeDeepRight(
         state,
-        mergeDeepRight(action.response, {
-          meta: {[action.endpoint]: {loading: false}},
-        }),
+        mergeDeepRight(
+          {[action.feature]: action.response},
+          {
+            meta: {[action.endpoint]: {loading: false}},
+          },
+        ),
       );
     case types.DATA_API_FAILURE:
       return mergeDeepRight(state, {

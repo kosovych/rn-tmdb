@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {connect} from 'react-redux';
@@ -9,9 +9,9 @@ import Container from '../shared/Container';
 import {
   loginSubmit as loginAction,
   setSessionId as setSessionIdAction,
-} from '../../store/auth/actions';
+} from '@store/auth/actions';
 
-const Login = ({loginSubmit, setSessionId}) => {
+const Login = ({loginSubmit}) => {
   const initialValues = {
     username: '',
     password: '',
@@ -25,10 +25,6 @@ const Login = ({loginSubmit, setSessionId}) => {
   const onSubmit = async ({username, password}) => {
     loginSubmit(username, password);
   };
-
-  useEffect(() => {
-    setSessionId(null);
-  }, []);
 
   return (
     <Container>

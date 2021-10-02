@@ -65,7 +65,7 @@ const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
       <View style={styles.inner}>
         <Image
           style={styles.img}
-          source={require('../../../../public/images/search.png')}
+          source={require('@public/images/search.png')}
         />
         <TextInput
           style={styles.input}
@@ -78,7 +78,7 @@ const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
           <TouchableOpacity onPress={clearHandler}>
             <Image
               style={styles.close}
-              source={require('../../../../public/images/close.png')}
+              source={require('@public/images/close.png')}
             />
           </TouchableOpacity>
         )}

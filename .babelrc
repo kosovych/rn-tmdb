@@ -17,6 +17,7 @@
         ],
         "alias": {
           "@store": "./src/store",
+          "@public": "./public",
           "@components": "./src/components",
           "@shared": "./src/components/shared",
           "@constants": "./src/constants",

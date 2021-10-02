@@ -24,10 +24,7 @@ const styles = StyleSheet.create({
 const Empty = () => {
   return (
     <View style={styles.wrapper}>
-      <Image
-        style={styles.img}
-        source={require('../../../../public/images/empty.png')}
-      />
+      <Image style={styles.img} source={require('@public/images/empty.png')} />
       <Text style={styles.text}>No Data</Text>
     </View>
   );

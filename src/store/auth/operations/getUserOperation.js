@@ -10,7 +10,7 @@ export const getUserOperation = createLogic({
   type: GET_USER,
   latest: true,
   async process({action, axios}, dispatch, done) {
-    const {sessionId} = action;
+    const {sessionId} = action.payload;
     try {
       const httpClient = await axios;
       const response = await httpClient.get(ACCOUNT, {

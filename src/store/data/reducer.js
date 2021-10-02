@@ -1,35 +1,35 @@
-import {mergeDeepRight, omit} from 'ramda';
-import * as types from './types';
+import {mergeDeepRight} from 'ramda';
+import {createReducer} from '@reduxjs/toolkit';
+
+import {dataApiRequest, dataApiSuccess, dataApiFailure} from './actions';
 
 const initialState = {
   meta: {},
 };
 
-const dataReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.DATA_API_REQUEST:
+const reducer = createReducer(initialState, builder => {
+  builder
+    .addCase(dataApiRequest, (state, action) => {
       return mergeDeepRight(state, {
-        meta: {[action.endpoint]: {loading: true}},
+        meta: {[action.payload.endpoint]: {loading: true}},
       });
-    case types.DATA_API_SUCCESS:
+    })
+    .addCase(dataApiSuccess, (state, action) => {
       return mergeDeepRight(
         state,
         mergeDeepRight(
-          {[action.feature]: action.response},
+          {[action.payload.feature]: action.payload.response},
           {
-            meta: {[action.endpoint]: {loading: false}},
+            meta: {[action.payload.endpoint]: {loading: false}},
           },
         ),
       );
-    case types.DATA_API_FAILURE:
+    })
+    .addCase(dataApiFailure, (state, action) => {
       return mergeDeepRight(state, {
         meta: {[action.endpoint]: {loading: false}},
       });
-    case types.DATA_DELETE:
-      return {...state, [action.kind]: omit(action.ids, state[action.kind])};
-    default:
-      return state;
-  }
-};
+    });
+});
 
-export default dataReducer;
+export default reducer;

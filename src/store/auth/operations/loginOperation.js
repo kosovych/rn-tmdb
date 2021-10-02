@@ -18,7 +18,7 @@ export const loginOperation = createLogic({
   async process({action, axios}, dispatch, done) {
     const {endpoint} = loginEndpoint;
     dispatch(dataApiRequest({endpoint}));
-    const {username, password} = action;
+    const {username, password} = action.payload;
     try {
       const httpClient = await axios;
       const requestTokenResponse = await httpClient.get(AUTH_TOKEN);

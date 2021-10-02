@@ -1,33 +1,22 @@
+import {configureStore} from '@reduxjs/toolkit';
 import {createLogicMiddleware} from 'redux-logic';
-import {createStore, applyMiddleware} from 'redux';
 
-import axios from '../axios';
+import axios from '../httpClient';
 import logic from './logics';
 import rootReducer from './rootReducer';
 
-const bindMiddleware = middleware => {
-  if (process.env.NODE_ENV !== 'production') {
-    const {composeWithDevTools} = require('redux-devtools-extension');
-
-    return composeWithDevTools(applyMiddleware(...middleware));
-  }
-
-  return applyMiddleware(...middleware);
-};
-
-const configureStore = (initialState = {}) => {
+const createStore = () => {
   const dependencies = {
     axios,
   };
-
   const logicMiddleware = createLogicMiddleware(logic, dependencies);
-  const store = createStore(
-    rootReducer,
-    initialState,
-    bindMiddleware([logicMiddleware]),
-  );
 
-  return store;
+  return configureStore({
+    reducer: rootReducer,
+    devTools: true,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(logicMiddleware),
+  });
 };
 
-export default configureStore;
+export default createStore;

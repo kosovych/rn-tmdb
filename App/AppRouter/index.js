@@ -3,9 +3,9 @@ import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {setSessionId as setSessionIdAction} from '@store/auth/actions';
+import {setSessionId} from '@store/auth/actions';
 import Loader from '@components/shared/Loader';
 import Login from '@components/Login';
 import TrendingMovies from '@components/TrendingMovies';
@@ -13,14 +13,17 @@ import {navigationRef} from '@lib/services/NavigationService';
 
 const Stack = createNativeStackNavigator();
 
-const AppRouter = ({setSessionId, sessionId}) => {
+const AppRouter = () => {
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  const sessionId = useSelector(state => state.auth.sessionId);
 
   useEffect(() => {
     const getSessionId = async () => {
       const _sessionId = await AsyncStorage.getItem('@session_id');
       setLoading(false);
-      setSessionId(_sessionId);
+      dispatch(setSessionId(_sessionId));
     };
     getSessionId();
   }, []);
@@ -48,12 +51,4 @@ const AppRouter = ({setSessionId, sessionId}) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sessionId: state.auth.sessionId,
-});
-
-const mapDispatchToProps = {
-  setSessionId: setSessionIdAction,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppRouter);
+export default AppRouter;

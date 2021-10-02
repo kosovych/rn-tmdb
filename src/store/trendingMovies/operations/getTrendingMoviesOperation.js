@@ -3,7 +3,7 @@ import {normalize} from 'normalizr';
 
 import {moviesListSchema, searchMoviesSchema} from '@schemas';
 import {GET_MOVIES} from '../types';
-import {requestMoviesSuccess} from '../actions';
+import {setMoviesIds} from '../actions';
 import {
   dataApiRequest,
   dataApiSuccess,
@@ -42,7 +42,7 @@ export const getMoviesOperation = createLogic({
           feature: 'movies',
         }),
       );
-      dispatch(requestMoviesSuccess(movies));
+      dispatch(setMoviesIds(movies));
     } catch (error) {
       dispatch(dataApiFailure({endpoint}));
     }

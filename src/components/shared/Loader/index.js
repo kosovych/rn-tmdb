@@ -1,22 +1,11 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 
-const styles = StyleSheet.create({
-  wrapper: {
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loader: {
-    width: 50,
-    height: 50,
-  },
-});
+import Styles from './styles';
 
 const Loader = () => {
   return (
-    <View style={styles.wrapper}>
+    <View style={Styles.wrapper}>
       <ActivityIndicator size="large" color="#145DA0" />
     </View>
   );

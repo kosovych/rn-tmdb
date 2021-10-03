@@ -1,47 +1,19 @@
 import React from 'react';
-import {
-  Text,
-  TouchableHighlight,
-  StyleSheet,
-  ActivityIndicator,
-  View,
-} from 'react-native';
+import {Text, TouchableHighlight, ActivityIndicator, View} from 'react-native';
+import Styles from './styles';
 
-const styles = StyleSheet.create({
-  overlay: {
-    borderRadius: 8,
-  },
-  button: {
-    fontSize: 20,
-    backgroundColor: '#145DA0',
-    padding: 12,
-    borderRadius: 8,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  text: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  loader: {
-    width: 19,
-    height: 19,
-  },
-});
-
-const Button = ({loading, title, onPress, ...props}) => {
+const Button = ({loading, title, onPress}) => {
   return (
     <TouchableHighlight
       activeOpacity={0.6}
-      style={styles.overlay}
+      style={Styles.overlay}
       onPress={onPress}
     >
-      <View style={styles.button}>
+      <View style={Styles.button}>
         {loading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
         ) : (
-          <Text style={styles.text}>{title}</Text>
+          <Text style={Styles.text}>{title}</Text>
         )}
       </View>
     </TouchableHighlight>

@@ -6,9 +6,15 @@ import {
 
 import {getMoviesOperation} from './trendingMovies/operations';
 
+import {getMovieInfoOperation} from './movie/operations';
+
 export default [
+  // auth
   loginOperation,
   getUserOperation,
   logoutOperation,
+  // trendingMovies
   getMoviesOperation,
+  // movie
+  getMovieInfoOperation,
 ];

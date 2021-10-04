@@ -41,7 +41,6 @@ export const loginOperation = createLogic({
       const sessionId = sessionIdResponse.data.session_id;
       dispatch(setSessionId(sessionId));
       dispatch(getUser(sessionId));
-      await AsyncStorage.setItem('@session_id', sessionId);
       dispatch(dataApiSuccess({endpoint}));
     } catch (error) {
       console.log(error);

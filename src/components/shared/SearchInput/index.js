@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, TextInput, Image} from 'react-native';
 
-import Styles from './styles';
+import useThemeColors from '@hooks/useThemeColors';
+
+import createStyles from './styles';
 
 const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
+
   const [value, setValue] = useState('');
   const handleTextChange = searchValue => {
     setValue(() => {
@@ -21,14 +26,14 @@ const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
   };
 
   return (
-    <View style={Styles.wrapper}>
-      <View style={Styles.inner}>
+    <View style={styles.wrapper}>
+      <View style={styles.inner}>
         <Image
-          style={Styles.img}
+          style={styles.img}
           source={require('@public/images/search.png')}
         />
         <TextInput
-          style={Styles.input}
+          style={styles.input}
           placeholder={placeholder}
           value={value}
           onChangeText={handleTextChange}
@@ -37,7 +42,7 @@ const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
         {Boolean(value) && (
           <TouchableOpacity onPress={clearHandler}>
             <Image
-              style={Styles.close}
+              style={styles.close}
               source={require('@public/images/close.png')}
             />
           </TouchableOpacity>

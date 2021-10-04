@@ -1,26 +1,29 @@
 import React from 'react';
 import {Text, View, Image} from 'react-native';
+import useThemeColors from '@hooks/useThemeColors';
 
-import Styles from './styles';
+import createStyles from './styles';
 
 const Movie = ({title, voteAverage, posterPath, releaseDate}) => {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
   return (
-    <View style={Styles.wrapper}>
-      <View style={Styles.inner}>
-        <View style={Styles.imgWrapper}>
+    <View style={styles.wrapper}>
+      <View style={styles.inner}>
+        <View style={styles.imgWrapper}>
           <Image
-            style={Styles.img}
+            style={styles.img}
             source={{
               uri: `https://image.tmdb.org/t/p/w500/${posterPath}`,
             }}
           />
         </View>
-        <View style={Styles.content}>
-          <View style={Styles.info}>
-            <Text style={Styles.releaseDate}>{releaseDate}</Text>
-            <Text style={Styles.voteAverage}>{voteAverage} / 10</Text>
+        <View style={styles.content}>
+          <View style={styles.info}>
+            <Text style={styles.releaseDate}>{releaseDate}</Text>
+            <Text style={styles.voteAverage}>{voteAverage} / 10</Text>
           </View>
-          <Text style={Styles.title}>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
       </View>
     </View>

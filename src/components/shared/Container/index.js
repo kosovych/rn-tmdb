@@ -1,10 +1,11 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
-import Styles from './styles';
+import createStyles from './styles';
 
-const Container = ({children}) => (
-  <ScrollView style={Styles.container}>{children}</ScrollView>
-);
+const Container = ({children}) => {
+  const styles = createStyles();
+  return <ScrollView style={styles.container}>{children}</ScrollView>;
+};
 
 export default Container;

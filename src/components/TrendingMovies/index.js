@@ -13,6 +13,7 @@ import {trendingMovies} from '@store/trendingMovies/endpoint';
 import {loadingSelector} from '@store/data/selectors';
 import Search from './Search';
 import Loader from '@components/shared/Loader';
+import ToggleTheme from './ToggleTheme';
 
 const TrendingMovies = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const TrendingMovies = () => {
   return (
     <View>
       <Search setSearch={setSearch} getMovies={getMovies} />
+      <ToggleTheme />
       {isLoading && <Loader />}
       {!isLoading && <MoviesList movies={movies} />}
     </View>

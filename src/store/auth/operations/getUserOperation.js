@@ -26,7 +26,6 @@ export const getUserOperation = createLogic({
           avatarUrl,
         }),
       );
-      await AsyncStorage.setItem('@user_id', `${id}`);
     } catch (error) {
       console.log(error);
     }

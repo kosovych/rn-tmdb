@@ -1,14 +1,26 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 import useThemeColors from '@hooks/useThemeColors';
+import {useLinkProps} from '@react-navigation/native';
 
 import createStyles from './styles';
 
-const Movie = ({title, voteAverage, posterPath, releaseDate}) => {
+const Movie = ({
+  title,
+  voteAverage,
+  posterPath,
+  releaseDate,
+  mediaType,
+  id,
+}) => {
   const colors = useThemeColors();
   const styles = createStyles(colors);
+  const {onPress, ...props} = useLinkProps({
+    to: {screen: 'Movie', params: {mediaType, id, title}},
+  });
+
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity onPress={onPress} style={styles.wrapper} {...props}>
       <View style={styles.inner}>
         <View style={styles.imgWrapper}>
           <Image
@@ -26,7 +38,7 @@ const Movie = ({title, voteAverage, posterPath, releaseDate}) => {
           <Text style={styles.title}>{title}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

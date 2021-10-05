@@ -1,5 +1,4 @@
 import {createLogic} from 'redux-logic';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {AUTH_TOKEN, VALIDATE_TOKEN_WITH_LOGIN, NEW_SESSION} from '@constants';
 

@@ -1,3 +1,4 @@
+import {createAction} from '@reduxjs/toolkit';
 import {
   LOGIN,
   LOGIN_LOGOUT,
@@ -6,27 +7,23 @@ import {
   SET_SESSION_ID,
 } from './types';
 
-export const setSessionId = sessionId => ({
-  type: SET_SESSION_ID,
-  sessionId,
-});
+export const setSessionId = createAction(SET_SESSION_ID, sessionId => ({
+  payload: {sessionId},
+}));
 
-export const loginSubmit = (username, password) => ({
-  type: LOGIN,
-  username,
-  password,
-});
+export const loginSubmit = createAction(LOGIN, (username, password) => ({
+  payload: {
+    username,
+    password,
+  },
+}));
 
-export const logout = () => ({
-  type: LOGIN_LOGOUT,
-});
+export const logout = createAction(LOGIN_LOGOUT);
 
-export const getUser = sessionId => ({
-  type: GET_USER,
-  sessionId,
-});
+export const getUser = createAction(GET_USER, sessionId => ({
+  payload: {
+    sessionId,
+  },
+}));
 
-export const storeUser = payload => ({
-  type: STORE_USER,
-  payload,
-});
+export const storeUser = createAction(STORE_USER, payload => ({payload}));

@@ -1,33 +1,49 @@
+import {configureStore} from '@reduxjs/toolkit';
 import {createLogicMiddleware} from 'redux-logic';
-import {createStore, applyMiddleware} from 'redux';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import axios from '../axios';
+import axios from '../httpClient';
 import logic from './logics';
 import rootReducer from './rootReducer';
 
-const bindMiddleware = middleware => {
-  if (process.env.NODE_ENV !== 'production') {
-    const {composeWithDevTools} = require('redux-devtools-extension');
-
-    return composeWithDevTools(applyMiddleware(...middleware));
-  }
-
-  return applyMiddleware(...middleware);
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['auth', 'theme'],
 };
 
-const configureStore = (initialState = {}) => {
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const createStore = () => {
   const dependencies = {
     axios,
   };
-
   const logicMiddleware = createLogicMiddleware(logic, dependencies);
-  const store = createStore(
-    rootReducer,
-    initialState,
-    bindMiddleware([logicMiddleware]),
-  );
 
-  return store;
+  return configureStore({
+    reducer: persistedReducer,
+    devTools: true,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(logicMiddleware),
+  });
 };
 
-export default configureStore;
+const store = createStore();
+const persistor = persistStore(store);
+
+export {store};
+export {persistor};

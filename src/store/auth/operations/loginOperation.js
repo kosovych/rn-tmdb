@@ -1,5 +1,4 @@
 import {createLogic} from 'redux-logic';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {AUTH_TOKEN, VALIDATE_TOKEN_WITH_LOGIN, NEW_SESSION} from '@constants';
 
@@ -18,7 +17,7 @@ export const loginOperation = createLogic({
   async process({action, axios}, dispatch, done) {
     const {endpoint} = loginEndpoint;
     dispatch(dataApiRequest({endpoint}));
-    const {username, password} = action;
+    const {username, password} = action.payload;
     try {
       const httpClient = await axios;
       const requestTokenResponse = await httpClient.get(AUTH_TOKEN);
@@ -41,7 +40,6 @@ export const loginOperation = createLogic({
       const sessionId = sessionIdResponse.data.session_id;
       dispatch(setSessionId(sessionId));
       dispatch(getUser(sessionId));
-      await AsyncStorage.setItem('@session_id', sessionId);
       dispatch(dataApiSuccess({endpoint}));
     } catch (error) {
       console.log(error);

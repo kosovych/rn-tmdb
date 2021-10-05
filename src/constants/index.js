@@ -5,3 +5,8 @@ export const ACCOUNT = '/account';
 export const VALIDATE_TOKEN_WITH_LOGIN =
   '/authentication/token/validate_with_login';
 export const NEW_SESSION = '/authentication/session/new';
+
+// THEME
+
+export const WHITE = 'white';
+export const DARK = 'dark';

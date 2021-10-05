@@ -1,38 +1,34 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
-import {setSessionId as setSessionIdAction} from '@store/auth/actions';
-import Loader from '@components/shared/Loader';
+import {navigationRef} from '@lib/services/NavigationService';
+
 import Login from '@components/Login';
 import TrendingMovies from '@components/TrendingMovies';
-import {navigationRef} from '@lib/services/NavigationService';
+import Movie from '@components/Movie';
 
 const Stack = createNativeStackNavigator();
 
-const AppRouter = ({setSessionId, sessionId}) => {
-  const [loading, setLoading] = useState(true);
+const AppRouter = () => {
+  const sessionId = useSelector(state => state.auth.sessionId);
 
-  useEffect(() => {
-    const getSessionId = async () => {
-      const _sessionId = await AsyncStorage.getItem('@session_id');
-      setLoading(false);
-      setSessionId(_sessionId);
-    };
-    getSessionId();
-  }, []);
-
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         {sessionId ? (
           <>
-            <Stack.Screen name="TrendingMovies" component={TrendingMovies} />
+            <Stack.Screen
+              name="TrendingMovies"
+              component={TrendingMovies}
+              options={{title: 'Trending Movies'}}
+            />
+            <Stack.Screen
+              name="Movie"
+              component={Movie}
+              options={({route}) => ({title: route.params.title})}
+            />
           </>
         ) : (
           <>
@@ -48,12 +44,4 @@ const AppRouter = ({setSessionId, sessionId}) => {
   );
 };
 
-const mapStateToProps = state => ({
-  sessionId: state.auth.sessionId,
-});
-
-const mapDispatchToProps = {
-  setSessionId: setSessionIdAction,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppRouter);
+export default AppRouter;

@@ -1,23 +1,17 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 
-const styles = StyleSheet.create({
-  wrapper: {
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loader: {
-    width: 50,
-    height: 50,
-  },
-});
+import useThemeColors from '@hooks/useThemeColors';
+
+import createStyles from './styles';
 
 const Loader = () => {
+  const colors = useThemeColors();
+  const styles = createStyles();
+
   return (
     <View style={styles.wrapper}>
-      <ActivityIndicator size="large" color="#145DA0" />
+      <ActivityIndicator size="large" color={colors.secondary} />
     </View>
   );
 };

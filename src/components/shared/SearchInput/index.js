@@ -1,49 +1,14 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import {View, TouchableOpacity, TextInput, Image} from 'react-native';
 
-const styles = StyleSheet.create({
-  wrapper: {
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 8,
-    marginBottom: 8,
-    padding: 4,
-    borderWidth: 2,
-    borderRadius: 8,
-    borderColor: '#2E8BC0',
-  },
-  inner: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  img: {
-    width: 20,
-    height: 20,
-    marginLeft: 6,
-  },
-  close: {
-    width: 20,
-    height: 20,
-    marginRight: 6,
-  },
-  input: {
-    flexGrow: 1,
-    padding: 4,
-    fontSize: 16,
-  },
-  errorInput: {
-    borderColor: '#dd1f00',
-  },
-});
+import useThemeColors from '@hooks/useThemeColors';
+
+import createStyles from './styles';
 
 const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
+  const colors = useThemeColors();
+  const styles = createStyles(colors);
+
   const [value, setValue] = useState('');
   const handleTextChange = searchValue => {
     setValue(() => {
@@ -65,7 +30,7 @@ const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
       <View style={styles.inner}>
         <Image
           style={styles.img}
-          source={require('../../../../public/images/search.png')}
+          source={require('@public/images/search.png')}
         />
         <TextInput
           style={styles.input}
@@ -78,7 +43,7 @@ const Input = ({placeholder, name, handleSubmit, setValues, onClear}) => {
           <TouchableOpacity onPress={clearHandler}>
             <Image
               style={styles.close}
-              source={require('../../../../public/images/close.png')}
+              source={require('@public/images/close.png')}
             />
           </TouchableOpacity>
         )}
